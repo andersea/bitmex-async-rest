@@ -1,4 +1,4 @@
-from bitmex_trio_rest import __version__
+from bitmex_async_rest import __version__
 
 
 def test_version():
