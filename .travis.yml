@@ -2,7 +2,7 @@ language: python
 python:
 - 3.8
 - 3.7
-install: pip install -U pytest poetry
+install: pip install -U pytest pytest-trio poetry
 script: pytest
 before_deploy:
 - poetry config pypi-token.pypi $PYPI_PASSWORD
