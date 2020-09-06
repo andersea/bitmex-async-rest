@@ -32,6 +32,9 @@ class BitMEXRestApi:
             connections=2)
 
         self.timeout = timeout
+    
+    async def instrument_active(self):
+        return await self._request(path='/instrument/active')
 
     async def trade_history(self, symbol, filter=None, start=0, count=100, reverse=False, start_time=None, end_time=None):
         query = {
