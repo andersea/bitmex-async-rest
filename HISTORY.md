@@ -1,5 +1,9 @@
 # History
 
+## 0.3.0
+
+* Add /instrument
+
 ## 0.2.2
 
 * Add /instrument/active

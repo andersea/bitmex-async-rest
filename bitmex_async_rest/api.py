@@ -32,7 +32,22 @@ class BitMEXRestApi:
             connections=2)
 
         self.timeout = timeout
-    
+
+    async def instrument(self, symbol, filter=None, start=0, count=100, reverse=False, start_time=None, end_time=None):
+        query = {
+            'symbol': symbol,
+            'start': start,
+            'count': count,
+            'reverse': reverse
+        }
+        if filter:
+            query['filter'] = ujson.dumps(filter)
+        if start_time:
+            query['startTime'] = start_time
+        if end_time:
+            query['endTime'] = end_time
+        return await self._request(path='/instrument', query=query, verb='GET')
+
     async def instrument_active(self):
         return await self._request(path='/instrument/active')
 
