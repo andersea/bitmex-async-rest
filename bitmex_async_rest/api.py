@@ -51,13 +51,14 @@ class BitMEXRestApi:
     async def instrument_active(self):
         return await self._request(path='/instrument/active')
     
-    async def execution(self, symbol, filter=None, start=0, count=100, reverse=False, start_time=None, end_time=None):
+    async def execution(self, symbol=None, filter=None, start=0, count=100, reverse=False, start_time=None, end_time=None):
         query = {
-            'symbol': symbol,
             'start': start,
             'count': count,
             'reverse': reverse
         }
+        if symbol:
+            query['symbol'] = symbol
         if filter:
             query['filter'] = ujson.dumps(filter)
         if start_time:
