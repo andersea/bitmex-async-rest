@@ -1,5 +1,9 @@
 # History
 
+## 0.4.0
+
+* Add /execution
+
 ## 0.3.0
 
 * Add /instrument

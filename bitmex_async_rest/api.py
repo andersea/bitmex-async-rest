@@ -50,6 +50,22 @@ class BitMEXRestApi:
 
     async def instrument_active(self):
         return await self._request(path='/instrument/active')
+    
+    async def execution(self, symbol, filter=None, start=0, count=100, reverse=False, start_time=None, end_time=None):
+        query = {
+            'symbol': symbol,
+            'start': start,
+            'count': count,
+            'reverse': reverse
+        }
+        if filter:
+            query['filter'] = ujson.dumps(filter)
+        if start_time:
+            query['startTime'] = start_time
+        if end_time:
+            query['endTime'] = end_time
+
+        return await self._request(path='/execution', query=query, verb='GET')
 
     async def trade_history(self, symbol, filter=None, start=0, count=100, reverse=False, start_time=None, end_time=None):
         query = {
