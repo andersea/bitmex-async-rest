@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bitmex-async-rest"
-version = "0.4.1"
+version = "0.4.2"
 description = "Async REST Api wrapper for BitMEX cryptocurrency derivatives exchange."
 authors = ["Anders Ellenshøj Andersen <andersa@ellenshoej.dk>"]
 license = "MIT"
