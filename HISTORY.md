@@ -1,5 +1,9 @@
 # History
 
+## 0.4.2
+
+* Fix incorrect reverse query parameter usage across all api calls.
+
 ## 0.4.1
 
 * Add /execution

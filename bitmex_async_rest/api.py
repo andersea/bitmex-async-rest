@@ -38,8 +38,9 @@ class BitMEXRestApi:
             'symbol': symbol,
             'start': start,
             'count': count,
-            'reverse': reverse
         }
+        if reverse:
+            query['reverse'] = 'true'
         if filter:
             query['filter'] = ujson.dumps(filter)
         if start_time:
@@ -55,12 +56,13 @@ class BitMEXRestApi:
         query = {
             'start': start,
             'count': count,
-            'reverse': reverse
         }
         if symbol:
             query['symbol'] = symbol
         if filter:
             query['filter'] = ujson.dumps(filter)
+        if reverse:
+            query['reverse'] = 'true'
         if start_time:
             query['startTime'] = start_time
         if end_time:
@@ -73,10 +75,11 @@ class BitMEXRestApi:
             'symbol': symbol,
             'start': start,
             'count': count,
-            'reverse': reverse
         }
         if filter:
             query['filter'] = ujson.dumps(filter)
+        if reverse:
+            query['reverse'] = 'true'
         if start_time:
             query['startTime'] = start_time
         if end_time:
@@ -89,8 +92,9 @@ class BitMEXRestApi:
             'symbol': symbol,
             'start': start,
             'count': count,
-            'reverse': reverse,
         }
+        if reverse:
+            query['reverse'] = 'true'
         if start_time:
             query['startTime'] = start_time
         if end_time:
