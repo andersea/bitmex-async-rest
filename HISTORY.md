@@ -1,5 +1,9 @@
 # History
 
+## 0.4.3
+
+* Updated ujson to 4.0.1
+
 ## 0.4.2
 
 * Fix incorrect reverse query parameter usage across all api calls.
