@@ -87,12 +87,13 @@ class BitMEXRestApi:
 
         return await self._request(path='/execution/tradeHistory', query=query, verb='GET')
 
-    async def funding(self, symbol, start=0, count=100, reverse=False, start_time=None, end_time=None):
+    async def funding(self, symbol=None, start=0, count=100, reverse=False, start_time=None, end_time=None):
         query = {
-            'symbol': symbol,
             'start': start,
             'count': count,
         }
+        if symbol:
+            query['symbol'] = symbol
         if reverse:
             query['reverse'] = 'true'
         if start_time:
