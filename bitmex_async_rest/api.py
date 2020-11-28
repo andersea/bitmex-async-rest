@@ -186,6 +186,13 @@ class BitMEXRestApi:
 
         return await self._request(path='/trade/bucketed', query=query)
 
+    async def user_wallet_history(self, count=1000, start=0):
+        return await self._request(path='/user/walletHistory', query={
+            'currency': 'XBt',
+            'start': start,
+            'count': count,
+        })
+
     async def _request(self, *, path, query=None, postdict=None, timeout=None, verb=None):
         """Send a request to BitMEX Servers."""
         if timeout is None:
