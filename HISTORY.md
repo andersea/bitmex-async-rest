@@ -1,5 +1,9 @@
 # History
 
+## 0.5.0
+
+* Add /user/walletHistory
+
 ## 0.4.4
 
 * Make symbol parameter optional in funding api.
