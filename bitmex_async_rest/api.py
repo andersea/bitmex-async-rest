@@ -214,10 +214,11 @@ class BitMEXRestApi:
         return response.json()
     
     async def _set_throttle(self, response):
-        try:
-            self._throttle_delay_until = await anyio.current_time() + max(0, math.sqrt(5/int()) - 0.5)
-        except ZeroDivisionError:
-            self._throttle_delay_until = await anyio.current_time() + 2
+        remaining = int(response.headers['x-ratelimit-remaining'])
+        if remaining == 0:
+            self._throttle_delay_until = await anyio.current_time() + 5
+        else:
+            self._throttle_delay_until = await anyio.current_time() + max(0, math.sqrt(10/remaining) - 0.2 * remaining)
 
     async def _throttle(self):
         await anyio.sleep(max(0, self._throttle_delay_until - await anyio.current_time()))
