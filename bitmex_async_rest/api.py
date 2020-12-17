@@ -1,16 +1,14 @@
 from base64 import b64encode
+import math
 from uuid import uuid4
-import logging
 
+import anyio
 import asks
-from asks.errors import BadStatus
 import ujson
 
 from . import __version__ as VERSION
 
 from .auth import APIKeyAuthWithExpires
-
-log = logging.getLogger(__name__)
 
 class BitMEXRestApi:
     def __init__(self, network, api_key=None, api_secret=None, timeout=7):
@@ -19,6 +17,7 @@ class BitMEXRestApi:
 
         self.api_key = api_key
         self.api_secret = api_secret
+        self._throttle_delay_until = 0
 
         # Prepare HTTPS session
         self.session = asks.Session(
@@ -207,13 +206,18 @@ class BitMEXRestApi:
         if self.api_key is not None and self.api_secret is not None:
             auth = APIKeyAuthWithExpires(self.api_key, self.api_secret)
 
+        await self._throttle()
         response = await self.session.request(verb, path=path, connection_timeout=timeout, json=postdict, auth=auth, params=query)
-        data = response.json()
+        await self._set_throttle(response)
         # Make non-200s throw
-        try:
-            response.raise_for_status()
-        except BadStatus:
-            log.warning('Error %d %s: %s', response.status_code, response.reason_phrase, data['error']['message'])
-            raise
-
+        response.raise_for_status()
         return response.json()
+    
+    async def _set_throttle(self, response):
+        try:
+            self._throttle_delay_until = await anyio.current_time() + max(0, math.sqrt(5/int()) - 0.5)
+        except ZeroDivisionError:
+            self._throttle_delay_until = await anyio.current_time() + 2
+
+    async def _throttle(self):
+        await anyio.sleep(max(0, self._throttle_delay_until - await anyio.current_time()))
