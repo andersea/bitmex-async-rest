@@ -4,7 +4,7 @@ from uuid import uuid4
 
 import anyio
 import asks
-import ujson
+import orjson
 
 from . import __version__ as VERSION
 
@@ -41,7 +41,7 @@ class BitMEXRestApi:
         if reverse:
             query['reverse'] = 'true'
         if filter:
-            query['filter'] = ujson.dumps(filter)
+            query['filter'] = orjson.dumps(filter).decode('utf8')
         if start_time:
             query['startTime'] = start_time
         if end_time:
@@ -59,7 +59,7 @@ class BitMEXRestApi:
         if symbol:
             query['symbol'] = symbol
         if filter:
-            query['filter'] = ujson.dumps(filter)
+            query['filter'] = orjson.dumps(filter).decode('utf8')
         if reverse:
             query['reverse'] = 'true'
         if start_time:
@@ -76,7 +76,7 @@ class BitMEXRestApi:
             'count': count,
         }
         if filter:
-            query['filter'] = ujson.dumps(filter)
+            query['filter'] = orjson.dumps(filter).decode('utf8')
         if reverse:
             query['reverse'] = 'true'
         if start_time:
@@ -105,7 +105,7 @@ class BitMEXRestApi:
     async def open_orders(self, symbol):
         query = {
             'symbol': symbol,
-            'filter': ujson.dumps({'open': True})
+            'filter': orjson.dumps({'open': True}).decode('utf8')
         }
         return await self._request(path='/order', query=query, verb='GET')
 
@@ -156,7 +156,10 @@ class BitMEXRestApi:
         return await self._request(path='/order/cancelAllAfter', postdict={'timeout': milliseconds}, verb='POST')
 
     async def position(self, symbol):
-        pos = await self._request(path='/position', query={'filter': ujson.dumps({'symbol': symbol})})
+        pos = await self._request(
+            path='/position',
+            query={'filter': orjson.dumps({'symbol': symbol}).decode('utf8')}
+        )
         if not pos:
             # No position found; stub it
             return {'avgCostPrice': 0, 'avgEntryPrice': 0, 'currentQty': 0, 'symbol': symbol, '_stub': True}

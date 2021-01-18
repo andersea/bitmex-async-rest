@@ -14,17 +14,16 @@ classifiers = [
     "Natural Language :: English",
     "Framework :: Trio",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
 ]
 
 [tool.poetry.dependencies]
-python = "^3.6"
-asks = "^2.4.8"
-ujson = "^4.0.1"
+python = "^3.7"
+asks = "^2.4.12"
 anyio = "^2.0.2"
+orjson = "^3.4.6"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.1"
