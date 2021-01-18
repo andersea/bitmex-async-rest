@@ -1,5 +1,9 @@
 # History
 
+## 0.6.1
+
+* Switch to orjson for serialization.
+
 ## 0.6.0
 
 * Implement automatic asymptotically increasing throttling. As remaining requests approaches zero, the next request will automatically be delayed by an increasing value. The delay is relative to current time, meaning that if the user does not make additional api calls while the throttle is active, the delay runs out automatically and the next call will not be throttled. The throttling strategy will prevent 429 (Too many requests) errors, as long as this library is the sole user of the login/source IP-address.

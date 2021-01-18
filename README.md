@@ -19,7 +19,7 @@ Async Rest API implementation for BitMEX cryptocurrency derivatives exchange.
 
 ## Installation
 
-This library requires Python 3.6 or greater. 
+This library requires Python 3.7 or greater. 
 
 To install from PyPI:
 
