@@ -2,7 +2,7 @@
 
 ## 0.7.0
 
-* Support for bulk order creation and amending was removed.
+* Support for bulk order creation and amending was removed.  See - https://blog.bitmex.com/api_announcement/removal-of-bulk-order-rest-api-endpoints/
 * Added single order amend.
 * Update dependencies.
 
