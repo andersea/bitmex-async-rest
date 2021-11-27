@@ -1,5 +1,10 @@
 # History
 
+## 0.7.0
+
+* Support for bulk order creation and amending was removed.
+* Added single order amend.
+
 ## 0.6.1
 
 * Switch to orjson for serialization.
