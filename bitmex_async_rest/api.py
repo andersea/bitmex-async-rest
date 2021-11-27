@@ -132,6 +132,9 @@ class BitMEXRestApi:
             query['text'] = text
         return await self._request(path='/order', postdict=query, verb='POST')
 
+    async def order_amend(self, order):
+        return await self._request(path='/order', postdict=order, verb='PUT')
+
     async def order_delete(self, order):
         return await self._request(path='/order', postdict=order, verb='DELETE')
 
