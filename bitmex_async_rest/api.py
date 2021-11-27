@@ -132,19 +132,6 @@ class BitMEXRestApi:
             query['text'] = text
         return await self._request(path='/order', postdict=query, verb='POST')
 
-    async def order_bulk_amend(self, orders):
-        return await self._request(path='/order/bulk', postdict={'orders': orders}, verb='PUT')
-
-    async def order_bulk_create(self, orders, orderid_prefix='', post_only=False):
-        for order in orders:
-            orderid = b64encode(uuid4().bytes).decode('utf8').rstrip('=\n')
-            if orderid_prefix:
-                orderid = orderid_prefix + '-' + orderid
-            order['clOrdID'] = orderid
-            if post_only:
-                order['execInst'] = 'ParticipateDoNotInitiate'
-        return await self._request(path='/order/bulk', postdict={'orders': orders}, verb='POST')
-
     async def order_delete(self, order):
         return await self._request(path='/order', postdict=order, verb='DELETE')
 
