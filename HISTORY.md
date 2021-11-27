@@ -4,6 +4,7 @@
 
 * Support for bulk order creation and amending was removed.
 * Added single order amend.
+* Update dependencies.
 
 ## 0.6.1
 
