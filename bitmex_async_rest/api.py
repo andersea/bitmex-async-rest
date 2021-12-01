@@ -102,6 +102,13 @@ class BitMEXRestApi:
 
         return await self._request(path='/funding', query=query, verb='GET')
 
+    async def order_book_L2(self, symbol, depth=5):
+        query = {
+            'symbol': symbol,
+            'depth': depth
+        }
+        return await self._request(path='/orderBook/L2', query=query, verb='GET')
+
     async def open_orders(self, symbol):
         query = {
             'symbol': symbol,
