@@ -1,5 +1,9 @@
 # History
 
+## 0.8.0
+
+* Support for orderBookL2.
+
 ## 0.7.0
 
 * Support for bulk order creation and amending was removed.  See - https://blog.bitmex.com/api_announcement/removal-of-bulk-order-rest-api-endpoints/
