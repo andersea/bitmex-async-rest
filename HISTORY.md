@@ -1,5 +1,9 @@
 # History
 
+## 0.8.1
+
+* Utility function order_by_id uses GET with filtering to search for an order by a specific ID.
+
 ## 0.8.0
 
 * Support for orderBookL2.
