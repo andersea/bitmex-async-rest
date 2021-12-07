@@ -115,6 +115,16 @@ class BitMEXRestApi:
             'filter': orjson.dumps({'open': True}).decode('utf8')
         }
         return await self._request(path='/order', query=query, verb='GET')
+    
+    async def order_by_id(self, orderID):
+        query = {
+            'filter': orjson.dumps({'orderID': orderID}).decode('utf8')
+        }
+        result = await self._request(path='/order', query=query, verb='GET')
+        if result:
+            return result[0]
+        else:
+            raise KeyError(f'Order {orderID} not found.')
 
     async def order(self, symbol, quantity, *, price=None, side=None, order_type=None, exec_inst=None, post_only=False, orderid_prefix='', text=None):
         query = {
