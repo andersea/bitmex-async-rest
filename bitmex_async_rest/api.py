@@ -195,9 +195,9 @@ class BitMEXRestApi:
 
         return await self._request(path='/trade/bucketed', query=query)
 
-    async def user_wallet_history(self, count=1000, start=0):
+    async def user_wallet_history(self, count=1000, start=0, currency='XBt'):
         return await self._request(path='/user/walletHistory', query={
-            'currency': 'XBt',
+            'currency': currency,
             'start': start,
             'count': count,
         })
