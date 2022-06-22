@@ -1,5 +1,9 @@
 # History
 
+## 0.9.0
+
+* user_wallet_history now supports multiple currencies, which is needed since addition of USDT wallets.
+
 ## 0.8.1
 
 * Utility function order_by_id uses GET with filtering to search for an order by a specific ID.
